@@ -45,7 +45,7 @@ def execute(query, connection=None, data=None, external=None, stream=False, veri
     data = params.pop('query', None)
 
     # basic auth
-    kwargs = dict(params=params, data=data, stream=stream, files=files, verify=verify)
+    kwargs = dict(params=params, data=data.encode('utf-8'), stream=stream, files=files, verify=verify)
     if 'user' in params and 'password' in params:
         kwargs['auth'] = (params['user'], params['password'])
         del params['user']
