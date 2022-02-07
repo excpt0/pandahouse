@@ -43,9 +43,11 @@ def execute(query, connection=None, data=None, external=None, stream=False, veri
     # https://clickhouse.com/docs/en/interfaces/http/
 
     data = params.pop('query', None)
+    if data:
+        data = data.encode('utf-8')
 
     # basic auth
-    kwargs = dict(params=params, data=data.encode('utf-8'), stream=stream, files=files, verify=verify)
+    kwargs = dict(params=params, data=data, stream=stream, files=files, verify=verify)
     if 'user' in params and 'password' in params:
         kwargs['auth'] = (params['user'], params['password'])
         del params['user']
