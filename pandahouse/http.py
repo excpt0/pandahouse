@@ -40,9 +40,9 @@ def execute(query, connection=None, data=None, external=None, stream=False, veri
     host, params, files = prepare(query, connection, external=external)
 
     # default limits of HTTP url length, for details see:
-    # https://clickhouse.yandex/docs/en/single/index.html#http-interface
-    if len(params['query']) >= 15000 and data is None:
-        data = params.pop('query', None)
+    # https://clickhouse.com/docs/en/interfaces/http/
+
+    data = params.pop('query', None)
 
     # basic auth
     kwargs = dict(params=params, data=data, stream=stream, files=files, verify=verify)
